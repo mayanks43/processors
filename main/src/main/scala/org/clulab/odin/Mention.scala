@@ -194,8 +194,9 @@ trait Mention extends Equals with Ordered[Mention] with Serializable {
     val h3 = mix(h2, sentence.hashCode)
     val h4 = mix(h3, document.ambivalenceHash)
     val h5 = mix(h4, argumentsHashCode)
-    val h6 = mixLast(h5, unorderedHash(attachments))
-    finalizeHash(h6, 6)
+    val h6 = mix(h5, stringHash(foundBy))
+    val h7 = mixLast(h6, unorderedHash(attachments))
+    finalizeHash(h7, 7)
   }
 
   private def argumentsHashCode: Int = {
